@@ -80,7 +80,7 @@ public class FornecedorBean implements Serializable {
 		try {
 			fornecedor = (Fornecedor) evento.getComponent().getAttributes().get("estadoSelecionado");
 
-			FornecedorDAO fornecedorDAO = new FornecedorDAO();
+			FornecedorDao fornecedorDAO = new FornecedorDao();
 			fornecedorDAO.excluir(fornecedor);
 
 			fornecedores = fornecedorDAO.listar();

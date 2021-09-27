@@ -35,7 +35,7 @@ public class EstadoDaoTest {
 	}
 
 	@Test
-
+	@Ignore
 	public void merge() {
 		Estado estado = new Estado();
 		estado.setNome("Goiás");
@@ -51,7 +51,7 @@ public class EstadoDaoTest {
 	}
 
 	@Test
-	@Ignore
+	
 	public void listar() {
 		EstadoDao estadoDAO = new EstadoDao();
 		List<Estado> resultado = estadoDAO.listar();
