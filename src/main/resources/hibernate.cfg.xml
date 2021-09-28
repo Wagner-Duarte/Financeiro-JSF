@@ -10,9 +10,9 @@
 
 		<!-- Configurações de Conexão com o Banco de Dados -->
 		<property name="connection.driver_class">org.postgresql.Driver</property>
-		<property name="connection.url">jdbc:postgresql://127.0.0.1:5432/financeiro</property>
-		<property name="connection.username">postgres</property>
-		<property name="connection.password">102030</property>
+		<property name="connection.url">jdbc:postgresql://1nmtqwherqlvhu:34b9e678f6efaafbeddc786faf2f881bcbca90054dc929ba7b8190984edb03cd@ec2-44-198-196-149.compute-1.amazonaws.com:5432/d4h9o0t9dkgg8v</property>
+		<property name="connection.username">snmtqwherqlvhu</property>
+		<property name="connection.password">34b9e678f6efaafbeddc786faf2f881bcbca90054dc929ba7b8190984edb03cd</property>
 
 
 		<!-- Pool de Conexões -->
