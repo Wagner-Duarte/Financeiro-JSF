@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import br.com.financeiro.domain.Estado;
 
+
 /**
  * @author Wagner Duarte
  *
