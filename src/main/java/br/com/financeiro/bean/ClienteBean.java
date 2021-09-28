@@ -2,6 +2,12 @@ package br.com.financeiro.bean;
 
 
 
+/**
+* @author Wagner Duarte
+*
+*
+* 26 de set. de 2021 20:57:45
+*/
 import java.io.Serializable;
 import java.util.List;
 

@@ -9,7 +9,12 @@ import org.hibernate.Transaction;
 import br.com.financeiro.domain.ItemVenda;
 import br.com.financeiro.domain.Venda;
 import br.com.financeiro.util.HibernateUtil;
-
+/**
+ * @author Wagner Duarte
+ *
+ *
+ * 26 de set. de 2021 09:20:42
+ */
 public class VendaDao extends GenericDao<Venda> {
 	public void salvar(Venda venda, List<ItemVenda> itensVenda){
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();

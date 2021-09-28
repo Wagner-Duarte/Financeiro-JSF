@@ -9,7 +9,12 @@ import org.hibernate.criterion.Order;
 
 import br.com.financeiro.domain.Funcionario;
 import br.com.financeiro.util.HibernateUtil;
-
+/**
+ * @author Wagner Duarte
+ *
+ *
+ * 26 de set. de 2021 09:20:42
+ */
 public class FuncionarioDao extends GenericDao<Funcionario>{
 	@SuppressWarnings("unchecked")
 	public List<Funcionario> listarOrdenado() {
