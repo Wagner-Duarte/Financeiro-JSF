@@ -1,7 +1,5 @@
-/**
- * 
- */
 package br.com.financeiro.dao;
+
 
 import java.util.List;
 
@@ -11,15 +9,13 @@ import org.hibernate.criterion.Order;
 
 import br.com.financeiro.domain.Funcionario;
 import br.com.financeiro.util.HibernateUtil;
-
 /**
  * @author Wagner Duarte
  *
  *
- * 26 de set. de 2021 11:25:59
+ * 26 de set. de 2021 09:20:42
  */
-public class FuncionarioDao extends GenericDao<Funcionario>{
-	
+public class FuncionarioDAO extends GenericDAO<Funcionario>{
 	@SuppressWarnings("unchecked")
 	public List<Funcionario> listarOrdenado() {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package br.com.financeiro.dao;
 
 import java.lang.reflect.ParameterizedType;
@@ -13,23 +10,26 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.financeiro.util.HibernateUtil;
-
 /**
  * @author Wagner Duarte
  *
  *
- *         26 de set. de 2021 09:22:19
+ * 26 de set. de 2021 09:20:42
  */
-public class GenericDao<Entidade> {
+public class GenericDAO<Entidade> {
+	
 
-	private Class<Entidade> classe;
+		
+		private Class<Entidade> classe;
 
-	@SuppressWarnings("unchecked")
-	public GenericDao() {
-		this.classe = (Class<Entidade>) ((ParameterizedType) getClass().getGenericSuperclass())
-				.getActualTypeArguments()[0];
-	}
-
+	
+		@SuppressWarnings("unchecked")
+		public GenericDAO() {
+			this.classe = (Class<Entidade>) ((ParameterizedType) getClass().getGenericSuperclass())
+					.getActualTypeArguments()[0];
+		}
+	
+	
 	public void salvar(Entidade entidade) {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 		Transaction transacao = null;
@@ -47,7 +47,9 @@ public class GenericDao<Entidade> {
 			sessao.close();
 		}
 	}
-
+	
+	
+	
 	public void merge(Entidade entidade) {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 		Transaction transacao = null;
@@ -65,7 +67,8 @@ public class GenericDao<Entidade> {
 			sessao.close();
 		}
 	}
-
+	
+	
 	@SuppressWarnings("unchecked")
 	public List<Entidade> listar() {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
@@ -79,7 +82,9 @@ public class GenericDao<Entidade> {
 			sessao.close();
 		}
 	}
-
+	
+	
+	
 	@SuppressWarnings("unchecked")
 	public List<Entidade> listar(String campoOrdenacao) {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
@@ -94,7 +99,11 @@ public class GenericDao<Entidade> {
 			sessao.close();
 		}
 	}
-
+	
+	
+	
+	
+	
 	@SuppressWarnings("unchecked")
 	public Entidade buscar(Long codigo) {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
@@ -109,7 +118,7 @@ public class GenericDao<Entidade> {
 			sessao.close();
 		}
 	}
-
+	
 	public void excluir(Entidade entidade) {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 		Transaction transacao = null;
@@ -127,7 +136,7 @@ public class GenericDao<Entidade> {
 			sessao.close();
 		}
 	}
-
+	
 	public void editar(Entidade entidade) {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 		Transaction transacao = null;
@@ -146,4 +155,6 @@ public class GenericDao<Entidade> {
 		}
 	}
 
+
+	
 }

@@ -1,8 +1,4 @@
-/**
- * 
- */
 package br.com.financeiro.dao;
-
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -12,15 +8,13 @@ import org.hibernate.criterion.Restrictions;
 
 import br.com.financeiro.domain.Cidade;
 import br.com.financeiro.util.HibernateUtil;
-
 /**
  * @author Wagner Duarte
  *
  *
- * 26 de set. de 2021 11:25:19
+ * 26 de set. de 2021 09:20:42
  */
-public class CidadeDao extends GenericDao<Cidade>{
-
+public class CidadeDAO extends GenericDAO<Cidade> {
 	@SuppressWarnings("unchecked")
 	public List<Cidade> buscarPorEstado(Long estadoCodigo) {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
