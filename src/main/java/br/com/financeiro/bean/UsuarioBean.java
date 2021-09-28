@@ -10,8 +10,8 @@ import javax.faces.bean.ViewScoped;
 
 import org.omnifaces.util.Messages;
 
-import br.com.financeiro.dao.PessoaDAO;
-import br.com.financeiro.dao.UsuarioDAO;
+import br.com.financeiro.dao.PessoaDao;
+import br.com.financeiro.dao.UsuarioDao;
 import br.com.financeiro.domain.Pessoa;
 import br.com.financeiro.domain.Usuario;
 
@@ -60,8 +60,8 @@ public class UsuarioBean implements Serializable {
 	@PostConstruct
 	public void listar(){
 		try{
-			UsuarioDAO usuarioDAO = new UsuarioDAO();
-			usuarios = usuarioDAO.listar("tipo");
+			UsuarioDao usuarioDao = new UsuarioDao();
+			usuarios = usuarioDao.listar("tipo");
 		}catch(RuntimeException erro){
 			Messages.addGlobalError("Ocorreu um erro ao tentar listar os usuários");
 			erro.printStackTrace();
@@ -72,8 +72,8 @@ public class UsuarioBean implements Serializable {
 		try {
 			usuario = new Usuario();
 
-			PessoaDAO pessoaDAO = new PessoaDAO();
-			pessoas = pessoaDAO.listar("nome");
+			PessoaDao pessoaDao = new PessoaDao();
+			pessoas = pessoaDao.listar("nome");
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar criar um novo usuário");
 			erro.printStackTrace();
@@ -82,14 +82,14 @@ public class UsuarioBean implements Serializable {
 
 	public void salvar() {
 		try {
-			UsuarioDAO usuarioDAO = new UsuarioDAO();
-			usuarioDAO.merge(usuario);
+			UsuarioDao usuarioDao = new UsuarioDao();
+			usuarioDao.merge(usuario);
 			
 			usuario = new Usuario();
-			usuarios = usuarioDAO.listar("tipo");
+			usuarios = usuarioDao.listar("tipo");
 			
-			PessoaDAO pessoaDAO = new PessoaDAO();
-			pessoas = pessoaDAO.listar("nome");
+			PessoaDao pessoaDao = new PessoaDao();
+			pessoas = pessoaDao.listar("nome");
 			
 			Messages.addGlobalInfo("Usuário salvo com sucesso");
 		} catch (RuntimeException erro) {

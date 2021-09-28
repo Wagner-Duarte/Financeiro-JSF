@@ -10,13 +10,8 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.financeiro.util.HibernateUtil;
-/**
- * @author Wagner Duarte
- *
- *
- * 26 de set. de 2021 09:20:42
- */
-public class GenericDAO<Entidade> {
+
+public class GenericDao<Entidade> {
 	
 
 		
@@ -24,7 +19,7 @@ public class GenericDAO<Entidade> {
 
 	
 		@SuppressWarnings("unchecked")
-		public GenericDAO() {
+		public GenericDao() {
 			this.classe = (Class<Entidade>) ((ParameterizedType) getClass().getGenericSuperclass())
 					.getActualTypeArguments()[0];
 		}

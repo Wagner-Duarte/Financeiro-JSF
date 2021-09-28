@@ -1,6 +1,3 @@
-/**
- * 
- */
 package br.com.financeiro.dao;
 
 import java.util.List;
@@ -13,14 +10,7 @@ import br.com.financeiro.domain.Cliente;
 
 import br.com.financeiro.util.HibernateUtil;
 
-/**
- * @author Wagner Duarte
- *
- *
- * 26 de set. de 2021 11:25:30
- */
 public class ClienteDao extends GenericDao<Cliente>{
-	
 	@SuppressWarnings("unchecked")
 	public List<Cliente> listarOrdenado() {
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();

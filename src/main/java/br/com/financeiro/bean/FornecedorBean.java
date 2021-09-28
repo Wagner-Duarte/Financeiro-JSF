@@ -10,7 +10,7 @@ import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
-import br.com.financeiro.dao.FornecedorDAO;
+import br.com.financeiro.dao.FornecedorDao;
 import br.com.financeiro.domain.Fornecedor;
 
 /**
@@ -51,11 +51,11 @@ public class FornecedorBean implements Serializable {
 
 	public void salvar() {
 		try {
-			FornecedorDAO fornecedorDAO = new FornecedorDAO();
-			fornecedorDAO.merge(fornecedor);
+			FornecedorDao fornecedorDao = new FornecedorDao();
+			fornecedorDao.merge(fornecedor);
 
 			novo();
-			fornecedores = fornecedorDAO.listar();
+			fornecedores = fornecedorDao.listar();
 			
 			Messages.addGlobalInfo("Fornecedor salvo com sucesso");
 		} catch (RuntimeException erro) {
@@ -69,8 +69,8 @@ public class FornecedorBean implements Serializable {
 @PostConstruct
 	public void listar(){
 		try{
-			FornecedorDAO fornecedorDAO = new FornecedorDAO();
-			fornecedores = fornecedorDAO.listar();
+			FornecedorDao fornecedorDao = new FornecedorDao();
+			fornecedores = fornecedorDao.listar();
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar listar os fornecedores");
 			erro.printStackTrace();
@@ -82,10 +82,10 @@ public void excluir(ActionEvent evento) {
 	try {
 		fornecedor = (Fornecedor) evento.getComponent().getAttributes().get("estadoSelecionado");
 
-		FornecedorDAO fornecedorDAO = new FornecedorDAO();
-		fornecedorDAO.excluir(fornecedor);
+		FornecedorDao fornecedorDao = new FornecedorDao();
+		fornecedorDao.excluir(fornecedor);
 		
-		fornecedores = fornecedorDAO.listar();
+		fornecedores = fornecedorDao.listar();
 
 		Messages.addGlobalInfo("Forneedor removido com sucesso");
 	} catch (RuntimeException erro) {

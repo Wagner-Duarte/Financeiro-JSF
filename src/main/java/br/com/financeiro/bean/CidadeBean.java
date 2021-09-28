@@ -1,6 +1,5 @@
 package br.com.financeiro.bean;
 
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,23 +10,24 @@ import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
-import br.com.financeiro.dao.CidadeDAO;
-import br.com.financeiro.dao.EstadoDAO;
+import br.com.financeiro.dao.CidadeDao;
+import br.com.financeiro.dao.EstadoDao;
 import br.com.financeiro.domain.Cidade;
 import br.com.financeiro.domain.Estado;
+
 /**
  * @author Wagner Duarte
  *
  *
- * 26 de set. de 2021 20:57:45
+ *         26 de set. de 2021 20:57:45
  */
 
 @ManagedBean
 @ViewScoped
 public class CidadeBean implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private Cidade cidade;
 	private List<Cidade> cidades;
 	private List<Estado> estados;
@@ -59,7 +59,7 @@ public class CidadeBean implements Serializable {
 	@PostConstruct
 	public void listar() {
 		try {
-			CidadeDAO cidadeDAO = new CidadeDAO();
+			CidadeDao cidadeDAO = new CidadeDao();
 			cidades = cidadeDAO.listar();
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao tentar listar as cidades");
@@ -71,23 +71,22 @@ public class CidadeBean implements Serializable {
 		try {
 			cidade = new Cidade();
 
-			EstadoDAO estadoDAO = new EstadoDAO();
+			EstadoDao estadoDAO = new EstadoDao();
 			estados = estadoDAO.listar("nome");
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao gerar uma nova cidade");
 			erro.printStackTrace();
 		}
 	}
-	
-	
+
 	public void salvar() {
 		try {
-			CidadeDAO cidadeDAO = new CidadeDAO();
+			CidadeDao cidadeDAO = new CidadeDao();
 			cidadeDAO.merge(cidade);
 
 			cidade = new Cidade();
 
-			EstadoDAO estadoDAO = new EstadoDAO();
+			EstadoDao estadoDAO = new EstadoDao();
 			estados = estadoDAO.listar();
 
 			cidades = cidadeDAO.listar();
@@ -103,7 +102,7 @@ public class CidadeBean implements Serializable {
 		try {
 			cidade = (Cidade) evento.getComponent().getAttributes().get("cidadeSelecionada");
 
-			CidadeDAO cidadeDAO = new CidadeDAO();
+			CidadeDao cidadeDAO = new CidadeDao();
 			cidadeDAO.excluir(cidade);
 
 			cidades = cidadeDAO.listar();
@@ -114,23 +113,17 @@ public class CidadeBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
-	
-	public void editar(ActionEvent evento){
+
+	public void editar(ActionEvent evento) {
 		try {
 			cidade = (Cidade) evento.getComponent().getAttributes().get("cidadeSelecionada");
 
-			EstadoDAO estadoDAO = new EstadoDAO();
+			EstadoDao estadoDAO = new EstadoDao();
 			estados = estadoDAO.listar();
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao tentar selecionar uma cidade");
 			erro.printStackTrace();
-		}	
+		}
 	}
 
-	
 }
-
-
-
-	
-

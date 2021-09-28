@@ -10,8 +10,8 @@ import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
-import br.com.financeiro.dao.FornecedorDAO;
-import br.com.financeiro.dao.ProdutoDAO;
+import br.com.financeiro.dao.FornecedorDao;
+import br.com.financeiro.dao.ProdutoDao;
 import br.com.financeiro.domain.Fornecedor;
 import br.com.financeiro.domain.Produto;
 
@@ -58,8 +58,8 @@ public class ProdutoBean implements Serializable {
 	@PostConstruct
 	public void listar() {
 		try {
-			ProdutoDAO produtoDAO = new ProdutoDAO();
-			produtos = produtoDAO.listar();
+			ProdutoDao produtoDao = new ProdutoDao();
+			produtos = produtoDao.listar();
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar listar os produtos");
 			erro.printStackTrace();
@@ -70,7 +70,7 @@ public class ProdutoBean implements Serializable {
 		try {
 			produto = new Produto();
 
-			FornecedorDAO fabricanteDAO = new FornecedorDAO();
+			FornecedorDao fabricanteDAO = new FornecedorDao();
 			fornecedor = fabricanteDAO.listar();
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao tentar gerar um novo produto");
@@ -82,8 +82,8 @@ public class ProdutoBean implements Serializable {
 		try {
 			produto = (Produto) evento.getComponent().getAttributes().get("produtoSelecionado");
 
-			FornecedorDAO fornecedorDAO = new FornecedorDAO();
-			fornecedor = fornecedorDAO.listar();
+			FornecedorDao fornecedorDao = new FornecedorDao();
+			fornecedor = fornecedorDao.listar();
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao tentar selecionar um produto");
 			erro.printStackTrace();
@@ -92,15 +92,15 @@ public class ProdutoBean implements Serializable {
 	
 	public void salvar() {
 		try {
-			ProdutoDAO produtoDAO = new ProdutoDAO();
-			produtoDAO.merge(produto);
+			ProdutoDao produtoDao = new ProdutoDao();
+			produtoDao.merge(produto);
 
 			produto = new Produto();
 
-			FornecedorDAO fornecedorDAO = new FornecedorDAO();
-			fornecedor = fornecedorDAO.listar();
+			FornecedorDao fornecedorDao = new FornecedorDao();
+			fornecedor = fornecedorDao.listar();
 
-			produtos = produtoDAO.listar();
+			produtos = produtoDao.listar();
 
 			Messages.addGlobalInfo("Produto salvo com sucesso");
 		} catch (RuntimeException erro) {
@@ -113,10 +113,10 @@ public class ProdutoBean implements Serializable {
 		try {
 			produto = (Produto) evento.getComponent().getAttributes().get("produtoSelecionado");
 
-			ProdutoDAO produtoDAO = new ProdutoDAO();
-			produtoDAO.excluir(produto);
+			ProdutoDao produtoDao = new ProdutoDao();
+			produtoDao.excluir(produto);
 
-			produtos = produtoDAO.listar();
+			produtos = produtoDao.listar();
 
 			Messages.addGlobalInfo("Produto removido com sucesso");
 		} catch (RuntimeException erro) {

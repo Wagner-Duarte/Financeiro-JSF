@@ -10,31 +10,30 @@ import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
-import br.com.financeiro.dao.EstadoDAO;
+import br.com.financeiro.dao.EstadoDao;
+import br.com.financeiro.dao.EstadoDao;
 import br.com.financeiro.domain.Estado;
-
-
 
 /**
  * @author Wagner Duarte
  *
  *
- * 26 de set. de 2021 20:57:45
+ *         26 de set. de 2021 20:57:45
  */
 @ManagedBean
 @ViewScoped
 public class EstadoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Estado estado;
-	
-	private List<Estado>estados;
-	
+
+	private List<Estado> estados;
+
 	public List<Estado> getEstados() {
 		return estados;
 	}
-	
+
 	public void setEstados(List<Estado> estados) {
 		this.estados = estados;
 	}
@@ -53,25 +52,23 @@ public class EstadoBean implements Serializable {
 
 	public void salvar() {
 		try {
-			EstadoDAO estadoDAO = new EstadoDAO();
+			EstadoDao estadoDAO = new EstadoDao();
 			estadoDAO.merge(estado);
 
 			novo();
 			estados = estadoDAO.listar();
-			
+
 			Messages.addGlobalInfo("Estado salvo com sucesso");
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar salvar o estado");
 			erro.printStackTrace();
 		}
 	}
-	
-	
 
-@PostConstruct
-	public void listar(){
-		try{
-			EstadoDAO estadoDAO = new EstadoDAO();
+	@PostConstruct
+	public void listar() {
+		try {
+			EstadoDao estadoDAO = new EstadoDao();
 			estados = estadoDAO.listar();
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar listar os estados");
@@ -79,27 +76,24 @@ public class EstadoBean implements Serializable {
 		}
 	}
 
+	public void excluir(ActionEvent evento) {
+		try {
+			estado = (Estado) evento.getComponent().getAttributes().get("estadoSelecionado");
 
-public void excluir(ActionEvent evento) {
-	try {
-		estado = (Estado) evento.getComponent().getAttributes().get("estadoSelecionado");
+			EstadoDao estadoDAO = new EstadoDao();
+			estadoDAO.excluir(estado);
 
-		EstadoDAO estadoDAO = new EstadoDAO();
-		estadoDAO.excluir(estado);
-		
-		estados = estadoDAO.listar();
+			estados = estadoDAO.listar();
 
-		Messages.addGlobalInfo("Estado removido com sucesso");
-	} catch (RuntimeException erro) {
-		Messages.addFlashGlobalError("Ocorreu um erro ao tentar remover o estado");
-		erro.printStackTrace();
+			Messages.addGlobalInfo("Estado removido com sucesso");
+		} catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar remover o estado");
+			erro.printStackTrace();
+		}
 	}
-}
 
-public void editar(ActionEvent evento){
-	estado = (Estado) evento.getComponent().getAttributes().get("estadoSelecionado");
-}
+	public void editar(ActionEvent evento) {
+		estado = (Estado) evento.getComponent().getAttributes().get("estadoSelecionado");
+	}
 
-	
-	
 }
