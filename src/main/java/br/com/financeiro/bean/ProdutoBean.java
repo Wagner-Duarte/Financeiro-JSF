@@ -1,7 +1,4 @@
-/**
- * 
- */
-package bean;
+package br.com.financeiro.bean;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,8 +10,8 @@ import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
-import br.com.financeiro.dao.FornecedorDao;
-import br.com.financeiro.dao.ProdutoDao;
+import br.com.financeiro.dao.FornecedorDAO;
+import br.com.financeiro.dao.ProdutoDAO;
 import br.com.financeiro.domain.Fornecedor;
 import br.com.financeiro.domain.Produto;
 
@@ -22,14 +19,14 @@ import br.com.financeiro.domain.Produto;
  * @author Wagner Duarte
  *
  *
- * 26 de set. de 2021 21:03:15
+ * 26 de set. de 2021 20:57:45
  */
 @ManagedBean
 @ViewScoped
-public class ProdutoBean implements Serializable{
+public class ProdutoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Produto  produto;
 	private List<Produto> produtos;
 	private List<Fornecedor> fornecedor;
@@ -61,7 +58,7 @@ public class ProdutoBean implements Serializable{
 	@PostConstruct
 	public void listar() {
 		try {
-			ProdutoDao produtoDAO = new ProdutoDao();
+			ProdutoDAO produtoDAO = new ProdutoDAO();
 			produtos = produtoDAO.listar();
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar listar os produtos");
@@ -73,7 +70,7 @@ public class ProdutoBean implements Serializable{
 		try {
 			produto = new Produto();
 
-			FornecedorDao fabricanteDAO = new FornecedorDao();
+			FornecedorDAO fabricanteDAO = new FornecedorDAO();
 			fornecedor = fabricanteDAO.listar();
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao tentar gerar um novo produto");
@@ -85,7 +82,7 @@ public class ProdutoBean implements Serializable{
 		try {
 			produto = (Produto) evento.getComponent().getAttributes().get("produtoSelecionado");
 
-			FornecedorDao fornecedorDAO = new FornecedorDao();
+			FornecedorDAO fornecedorDAO = new FornecedorDAO();
 			fornecedor = fornecedorDAO.listar();
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao tentar selecionar um produto");
@@ -95,12 +92,12 @@ public class ProdutoBean implements Serializable{
 	
 	public void salvar() {
 		try {
-			ProdutoDao produtoDAO = new ProdutoDao();
+			ProdutoDAO produtoDAO = new ProdutoDAO();
 			produtoDAO.merge(produto);
 
 			produto = new Produto();
 
-			FornecedorDao fornecedorDAO = new FornecedorDao();
+			FornecedorDAO fornecedorDAO = new FornecedorDAO();
 			fornecedor = fornecedorDAO.listar();
 
 			produtos = produtoDAO.listar();
@@ -116,7 +113,7 @@ public class ProdutoBean implements Serializable{
 		try {
 			produto = (Produto) evento.getComponent().getAttributes().get("produtoSelecionado");
 
-			ProdutoDao produtoDAO = new ProdutoDao();
+			ProdutoDAO produtoDAO = new ProdutoDAO();
 			produtoDAO.excluir(produto);
 
 			produtos = produtoDAO.listar();

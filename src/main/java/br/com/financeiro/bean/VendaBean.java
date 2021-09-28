@@ -1,7 +1,5 @@
-/**
- * 
- */
-package bean;
+package br.com.financeiro.bean;
+
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -16,10 +14,10 @@ import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
-import br.com.financeiro.dao.ClienteDao;
-import br.com.financeiro.dao.FuncionarioDao;
-import br.com.financeiro.dao.ProdutoDao;
-import br.com.financeiro.dao.VendaDao;
+import br.com.financeiro.dao.ClienteDAO;
+import br.com.financeiro.dao.FuncionarioDAO;
+import br.com.financeiro.dao.ProdutoDAO;
+import br.com.financeiro.dao.VendaDAO;
 import br.com.financeiro.domain.Cliente;
 import br.com.financeiro.domain.Funcionario;
 import br.com.financeiro.domain.ItemVenda;
@@ -30,7 +28,7 @@ import br.com.financeiro.domain.Venda;
  * @author Wagner Duarte
  *
  *
- * 26 de set. de 2021 21:03:38
+ * 26 de set. de 2021 20:57:45
  */
 @ManagedBean
 @ViewScoped
@@ -91,7 +89,7 @@ public class VendaBean implements Serializable {
 			venda = new Venda();
 			venda.setPrecoTotal(new BigDecimal("0.00"));
 
-			ProdutoDao produtoDAO = new ProdutoDao();
+			ProdutoDAO produtoDAO = new ProdutoDAO();
 			produtos = produtoDAO.listar("descricao");
 
 			itensVenda = new ArrayList<>();
@@ -159,10 +157,10 @@ public class VendaBean implements Serializable {
 			venda.setCliente(null);
 			venda.setFuncionario(null);
 			
-			FuncionarioDao funcionarioDAO = new FuncionarioDao();
+			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 			funcionarios = funcionarioDAO.listarOrdenado();
 
-			ClienteDao clienteDAO = new ClienteDao();
+			ClienteDAO clienteDAO = new ClienteDAO();
 			clientes = clienteDAO.listarOrdenado();
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar finalizar a venda");
@@ -177,13 +175,13 @@ public class VendaBean implements Serializable {
 				return;
 			}
 			
-			VendaDao vendaDAO = new VendaDao();
+			VendaDAO vendaDAO = new VendaDAO();
 			vendaDAO.salvar(venda, itensVenda);
 			
 			venda = new Venda();
 			venda.setPrecoTotal(new BigDecimal("0.00"));
 
-			ProdutoDao produtoDAO = new ProdutoDao();
+			ProdutoDAO produtoDAO = new ProdutoDAO();
 			produtos = produtoDAO.listar("descricao");
 
 			itensVenda = new ArrayList<>();

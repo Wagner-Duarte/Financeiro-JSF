@@ -7,4 +7,4 @@
  *
  * 26 de set. de 2021 20:57:45
  */
-package bean;
+package br.com.financeiro.bean;

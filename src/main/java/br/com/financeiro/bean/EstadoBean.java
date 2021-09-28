@@ -1,7 +1,4 @@
-/**
- * 
- */
-package bean;
+package br.com.financeiro.bean;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,22 +10,25 @@ import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
-import br.com.financeiro.dao.EstadoDao;
+import br.com.financeiro.dao.EstadoDAO;
 import br.com.financeiro.domain.Estado;
+
+
 
 /**
  * @author Wagner Duarte
  *
  *
- * 26 de set. de 2021 21:02:33
+ * 26 de set. de 2021 20:57:45
  */
 @ManagedBean
 @ViewScoped
-public class EstadoBean implements Serializable{
+public class EstadoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	private Estado estado;
+	
 	private List<Estado>estados;
 	
 	public List<Estado> getEstados() {
@@ -53,7 +53,7 @@ public class EstadoBean implements Serializable{
 
 	public void salvar() {
 		try {
-			EstadoDao estadoDAO = new EstadoDao();
+			EstadoDAO estadoDAO = new EstadoDAO();
 			estadoDAO.merge(estado);
 
 			novo();
@@ -68,10 +68,10 @@ public class EstadoBean implements Serializable{
 	
 	
 
-	@PostConstruct
+@PostConstruct
 	public void listar(){
 		try{
-			EstadoDao estadoDAO = new EstadoDao();
+			EstadoDAO estadoDAO = new EstadoDAO();
 			estados = estadoDAO.listar();
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar listar os estados");
@@ -84,7 +84,7 @@ public void excluir(ActionEvent evento) {
 	try {
 		estado = (Estado) evento.getComponent().getAttributes().get("estadoSelecionado");
 
-		EstadoDao estadoDAO = new EstadoDao();
+		EstadoDAO estadoDAO = new EstadoDAO();
 		estadoDAO.excluir(estado);
 		
 		estados = estadoDAO.listar();
@@ -103,4 +103,3 @@ public void editar(ActionEvent evento){
 	
 	
 }
-

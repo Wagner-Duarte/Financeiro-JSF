@@ -1,7 +1,5 @@
-/**
- * 
- */
-package bean;
+package br.com.financeiro.bean;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,9 +12,9 @@ import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
-import br.com.financeiro.dao.CidadeDao;
-import br.com.financeiro.dao.EstadoDao;
-import br.com.financeiro.dao.PessoaDao;
+import br.com.financeiro.dao.CidadeDAO;
+import br.com.financeiro.dao.EstadoDAO;
+import br.com.financeiro.dao.PessoaDAO;
 import br.com.financeiro.domain.Cidade;
 import br.com.financeiro.domain.Estado;
 import br.com.financeiro.domain.Pessoa;
@@ -25,12 +23,11 @@ import br.com.financeiro.domain.Pessoa;
  * @author Wagner Duarte
  *
  *
- *         26 de set. de 2021 21:03:01
+ * 26 de set. de 2021 20:57:45
  */
 @ManagedBean
 @ViewScoped
-public class PessoaBean implements Serializable{
-
+public class PessoaBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -40,14 +37,16 @@ public class PessoaBean implements Serializable{
 	private List<Estado> estados;
 	private List<Cidade> cidades;
 
+	
+	
 	public Estado getEstado() {
 		return estado;
 	}
-
+	
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
-
+	
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
@@ -83,7 +82,7 @@ public class PessoaBean implements Serializable{
 	@PostConstruct
 	public void listar() {
 		try {
-			PessoaDao pessoaDAO = new PessoaDao();
+			PessoaDAO pessoaDAO = new PessoaDAO();
 			pessoas = pessoaDAO.listar();
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar listar as pessoas");
@@ -95,7 +94,7 @@ public class PessoaBean implements Serializable{
 		try {
 			pessoa = new Pessoa();
 
-			EstadoDao estadoDAO = new EstadoDao();
+			EstadoDAO estadoDAO = new EstadoDAO();
 			estados = estadoDAO.listar("nome");
 
 			cidades = new ArrayList<Cidade>();
@@ -106,33 +105,33 @@ public class PessoaBean implements Serializable{
 	}
 
 	public void editar(ActionEvent evento) {
-		try {
+		try{
 			pessoa = (Pessoa) evento.getComponent().getAttributes().get("pessoaSelecionada");
-
+			
 			estado = pessoa.getCidade().getEstado();
-
-			EstadoDao estadoDAO = new EstadoDao();
+			
+			EstadoDAO estadoDAO = new EstadoDAO();
 			estados = estadoDAO.listar("nome");
-
-			CidadeDao cidadeDAO = new CidadeDao();
+			
+			CidadeDAO cidadeDAO = new CidadeDAO();
 			cidades = cidadeDAO.buscarPorEstado(estado.getCodigo());
-		} catch (RuntimeException erro) {
+		}catch(RuntimeException erro){
 			Messages.addGlobalError("Ocorreu um erro ao tentar selecionar uma pessoa");
 		}
 	}
 
 	public void salvar() {
 		try {
-			PessoaDao pessoaDAO = new PessoaDao();
+			PessoaDAO pessoaDAO = new PessoaDAO();
 			pessoaDAO.merge(pessoa);
-
+			
 			pessoas = pessoaDAO.listar("nome");
-
+			
 			pessoa = new Pessoa();
-
+			
 			estado = new Estado();
 
-			EstadoDao estadoDAO = new EstadoDao();
+			EstadoDAO estadoDAO = new EstadoDAO();
 			estados = estadoDAO.listar("nome");
 
 			cidades = new ArrayList<>();
@@ -145,11 +144,13 @@ public class PessoaBean implements Serializable{
 	public void excluir(ActionEvent evento) {
 
 	}
+	
+	
 
-	public void popular() {
+public void popular() {
 		try {
 			if (estado != null) {
-				CidadeDao cidadeDAO = new CidadeDao();
+				CidadeDAO cidadeDAO = new CidadeDAO();
 				cidades = cidadeDAO.buscarPorEstado(estado.getCodigo());
 			} else {
 				cidades = new ArrayList<>();
@@ -159,5 +160,6 @@ public class PessoaBean implements Serializable{
 			erro.printStackTrace();
 		}
 	}
-
+	
+	
 }

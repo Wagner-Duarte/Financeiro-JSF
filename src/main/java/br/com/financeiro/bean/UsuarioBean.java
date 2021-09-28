@@ -1,7 +1,5 @@
-/**
- * 
- */
-package bean;
+package br.com.financeiro.bean;
+
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,8 +10,8 @@ import javax.faces.bean.ViewScoped;
 
 import org.omnifaces.util.Messages;
 
-import br.com.financeiro.dao.PessoaDao;
-import br.com.financeiro.dao.UsuarioDao;
+import br.com.financeiro.dao.PessoaDAO;
+import br.com.financeiro.dao.UsuarioDAO;
 import br.com.financeiro.domain.Pessoa;
 import br.com.financeiro.domain.Usuario;
 
@@ -21,17 +19,16 @@ import br.com.financeiro.domain.Usuario;
  * @author Wagner Duarte
  *
  *
- * 26 de set. de 2021 21:03:24
+ * 26 de set. de 2021 20:57:45
  */
 
 @ManagedBean
 @ViewScoped
-public class UsuarioBean implements Serializable{
-
+public class UsuarioBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-private Usuario usuario;
+	private Usuario usuario;
 	
 	private List<Pessoa> pessoas;
 	private List<Usuario> usuarios;
@@ -63,7 +60,7 @@ private Usuario usuario;
 	@PostConstruct
 	public void listar(){
 		try{
-			UsuarioDao usuarioDAO = new UsuarioDao();
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
 			usuarios = usuarioDAO.listar("tipo");
 		}catch(RuntimeException erro){
 			Messages.addGlobalError("Ocorreu um erro ao tentar listar os usuários");
@@ -75,7 +72,7 @@ private Usuario usuario;
 		try {
 			usuario = new Usuario();
 
-			PessoaDao pessoaDAO = new PessoaDao();
+			PessoaDAO pessoaDAO = new PessoaDAO();
 			pessoas = pessoaDAO.listar("nome");
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar criar um novo usuário");
@@ -85,13 +82,13 @@ private Usuario usuario;
 
 	public void salvar() {
 		try {
-			UsuarioDao usuarioDAO = new UsuarioDao();
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
 			usuarioDAO.merge(usuario);
 			
 			usuario = new Usuario();
 			usuarios = usuarioDAO.listar("tipo");
 			
-			PessoaDao pessoaDAO = new PessoaDao();
+			PessoaDAO pessoaDAO = new PessoaDAO();
 			pessoas = pessoaDAO.listar("nome");
 			
 			Messages.addGlobalInfo("Usuário salvo com sucesso");
@@ -101,3 +98,5 @@ private Usuario usuario;
 		}
 	}
 }
+
+
